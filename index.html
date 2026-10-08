@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduSport AI - GDTC & Sức Khỏe Học Đường | THPT Huỳnh Tấn Phát</title>
+
+  <!-- FAVICON THỂ THAO SỐ CHUYÊN NGHIỆP (Data-URI SVG) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2310b981'/%3E%3Cstop offset='100%25' stop-color='%23064e3b'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23grad)'/%3E%3Ccircle cx='32' cy='32' r='26' fill='none' stroke='%2334d399' stroke-width='2' stroke-dasharray='4 2'/%3E%3Cpath d='M14 34 L22 34 L27 20 L33 46 L38 28 L43 36 L50 36' fill='none' stroke='%23ffffff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='46' cy='18' r='6' fill='%23fbbf24' stroke='%23ffffff' stroke-width='1.5'/%3E%3C/svg%3E">
+  <meta name="theme-color" content="#064e3b">
+
+  <!-- Tailwind CSS & Font Awesome -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @media print {
+      .no-print { display: none !important; }
+      .print-only { display: block !important; }
+      body { background: white !important; color: black !important; }
+    }
+  </style>
+</head>
+<body class="bg-slate-100 font-sans text-slate-800 antialiased min-h-screen flex flex-col">
+
+  <!-- TOP HEADER -->
+  <header class="bg-gradient-to-r from-slate-900 via-emerald-950 to-teal-950 text-white shadow-md border-b border-emerald-800/40">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center space-x-3">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-900 border border-emerald-400/50 flex items-center justify-center text-white text-xl shadow-lg relative">
+          <i class="fa-solid fa-heart-pulse"></i>
+          <span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-amber-400 rounded-full border-2 border-slate-900"></span>
+        </div>
+        <div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="bg-amber-400 text-slate-950 text-[11px] font-black px-2 py-0.5 rounded tracking-wide uppercase">AI GDTC 4.0</span>
+            <span class="bg-emerald-700/80 text-emerald-200 text-[11px] font-semibold px-2 py-0.5 rounded flex items-center gap-1">
+              <i class="fa-solid fa-volleyball text-[10px]"></i> <span id="headerCurSubj">GDTC ĐẶC THÙ THPT</span>
+            </span>
+            <span class="text-xs text-emerald-300/80 hidden md:inline">● GDPT 2018 • Chuẩn CV 5512 & 7991 • PPCT 70 Tiết</span>
+          </div>
+          <h1 class="text-lg md:text-xl font-bold tracking-tight text-white flex items-center gap-2">
+            EduSport AI - GDTC & Sức Khỏe Học Đường
+          </h1>
+          <p class="text-xs text-emerald-200/90 font-medium">
+            <span id="headerUserDisplay" class="text-amber-300 font-semibold">Giáo viên: Nguyễn Trung Hiếu</span> • 
+            <span class="text-emerald-100">Bộ môn: Giáo dục Thể chất</span> • 
+            <span class="text-emerald-300">Trường THPT Huỳnh Tấn Phát</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-2 text-xs">
+        <div class="hidden sm:flex items-center gap-1.5 bg-emerald-900/60 border border-emerald-700/50 px-2.5 py-1.5 rounded-lg text-emerald-200">
+          <i class="fa-solid fa-flag text-emerald-400"></i>
+          <span>Tiếng Việt</span>
+        </div>
+        <div class="flex items-center gap-1.5 bg-emerald-900/60 border border-emerald-700/50 px-2.5 py-1.5 rounded-lg text-emerald-300">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>Trực tuyến</span>
+        </div>
+        <button onclick="saveSession()" class="flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-600 px-3 py-1.5 rounded-lg text-slate-200 font-medium transition">
+          <i class="fa-solid fa-floppy-disk"></i>
+          <span>Sao lưu</span>
+        </button>
+        <button onclick="switchTab('tab-phuhuynh')" class="relative flex items-center gap-1.5 bg-rose-700 hover:bg-rose-600 text-white px-3 py-1.5 rounded-lg font-semibold shadow-sm transition">
+          <i class="fa-solid fa-heart"></i>
+          <span>Cổng Phụ Huynh</span>
+          <span id="badgeCount" class="w-4 h-4 bg-white text-rose-700 rounded-full text-[10px] font-black flex items-center justify-center">1</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAV TABS (Có thêm Tab Quản Lý Học Sinh) -->
+  <nav class="bg-white border-b border-slate-200 shadow-sm sticky top-0 z-30 no-print">
+    <div class="max-w-7xl mx-auto px-4 flex items-center justify-between overflow-x-auto no-scrollbar py-2">
+      <div class="flex space-x-1 sm:space-x-2 text-xs md:text-sm font-semibold whitespace-nowrap">
+        
+        <button onclick="switchTab('tab-thetrang')" id="btn-tab-thetrang" class="nav-tab px-3 py-2 rounded-lg bg-emerald-800 text-white shadow-sm flex items-center gap-2 transition">
+          <i class="fa-solid fa-person-running text-amber-300"></i>
+          <span>Gợi Ý Bài Tập Thể Trạng</span>
+        </button>
+
+        <button onclick="switchTab('tab-hocsinh')" id="btn-tab-hocsinh" class="nav-tab px-3 py-2 rounded-lg text-slate-600 hover:text-emerald-700 hover:bg-emerald-50 flex items-center gap-2 transition">
+          <i class="fa-solid fa-users-line text-teal-600"></i>
+          <span>Danh Sách Lớp & Học Sinh (Nhập trực tiếp)</span>
+        </button>
+
+        <button onclick="switchTab('tab-khbd')" id="btn-tab-khbd" class="nav-tab px-3 py-2 rounded-lg text-slate-600 hover:text-emerald-700 hover:bg-emerald-50 flex items-center gap-2 transition">
+          <i class="fa-solid fa-book-open text-emerald-600"></i>
+          <span>Soạn KHBD (AI)</span>
+        </button>
+
+        <button onclick="switchTab('tab-danhgia')" id="btn-tab-danhgia" class="nav-tab px-3 py-2 rounded-lg text-slate-600 hover:text-emerald-700 hover:bg-emerald-50 flex items-center gap-2 transition">
+          <i class="fa-solid fa-clipboard-check text-blue-600"></i>
+          <span>Đánh Giá Thường Xuyên</span>
+        </button>
+
+        <button onclick="switchTab('tab-bmi')" id="btn-tab-bmi" class="nav-tab px-3 py-2 rounded-lg text-slate-600 hover:text-emerald-700 hover:bg-emerald-50 flex items-center gap-2 transition">
+          <i class="fa-solid fa-scale-balanced text-teal-600"></i>
+          <span>Chỉ Số BMI</span>
+        </button>
+
+        <button onclick="switchTab('tab-dinhduong')" id="btn-tab-dinhduong" class="nav-tab px-3 py-2 rounded-lg text-slate-600 hover:text-emerald-700 hover:bg-emerald-50 flex items-center gap-2 transition">
+          <i class="fa-solid fa-utensils text-orange-600"></i>
+          <span>Dinh Dưỡng Nông Thôn</span>
+        </button>
+
+        <button onclick="switchTab('tab-phuhuynh')" id="btn-tab-phuhuynh" class="nav-tab px-3 py-2 rounded-lg text-slate-600 hover:text-emerald-700 hover:bg-emerald-50 flex items-center gap-2 transition">
+          <i class="fa-solid fa-bell text-rose-600"></i>
+          <span>Tin Nhắn Phụ Huynh</span>
+        </button>
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- THANH CẤU HÌNH NHANH -->
+  <section class="bg-slate-200/80 border-b border-slate-300/80 py-2.5 px-4 no-print">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs md:text-sm">
+      <div class="flex items-center gap-2 flex-wrap">
+        <label class="font-bold text-slate-700 flex items-center gap-1.5">
+          <i class="fa-solid fa-user-pen text-emerald-700"></i> Người thực hiện:
+        </label>
+        
+        <select id="userRole" onchange="handleRoleChange()" class="bg-white border border-slate-300 rounded-md px-2 py-1 font-medium text-slate-700 focus:ring-1 focus:ring-emerald-500">
+          <option value="gv">Giáo viên</option>
+          <option value="hs">Học sinh</option>
+        </select>
+
+        <select id="gvSelect" onchange="selectTeacher(this.value)" class="bg-white border border-slate-300 rounded-md px-2 py-1 font-semibold text-emerald-800 focus:ring-1 focus:ring-emerald-500">
+          <option value="Nguyễn Trung Hiếu">Nguyễn Trung Hiếu</option>
+          <option value="Nguyễn Tấn Phước">Nguyễn Tấn Phước</option>
+          <option value="Bồ Công Lâm">Bồ Công Lâm</option>
+          <option value="Bùi Thanh Liêm">Bùi Thanh Liêm</option>
+          <option value="Cao Minh Thắng">Cao Minh Thắng</option>
+          <option value="Phạm Thị Ngọc Du">Phạm Thị Ngọc Du</option>
+          <option value="Võ Thị Yến Lan">Võ Thị Yến Lan</option>
+          <option value="custom">-- Tự nhập tên khác --</option>
+        </select>
+
+        <input type="text" id="customUserName" placeholder="Nhập họ và tên..." oninput="updateUserTitle()"
+               class="bg-white border border-slate-300 rounded-md px-2.5 py-1 text-slate-800 font-semibold focus:ring-1 focus:ring-emerald-500 w-44 md:w-56"
+               value="Nguyễn Trung Hiếu">
+
+        <span class="text-slate-500 italic hidden lg:inline">| THPT Huỳnh Tấn Phát • Bộ môn Giáo dục Thể chất</span>
+      </div>
+
+      <div class="flex items-center gap-2 flex-wrap">
+        <div class="flex items-center gap-1">
+          <span class="font-bold text-slate-700">Phân môn:</span>
+          <select id="sportSelect" onchange="onSportChange()" class="bg-white border border-slate-300 rounded-md px-2 py-1 font-bold text-slate-800 focus:ring-1 focus:ring-emerald-500">
+            <optgroup label="3 Phân môn chính thức tại THPT Huỳnh Tấn Phát">
+              <option value="bong-chuyen" selected>Bóng chuyền (K10, 11, 12)</option>
+              <option value="bong-ro">Bóng rổ (K10, 11, 12)</option>
+              <option value="cau-long">Cầu lông (K11, 12)</option>
+            </optgroup>
+            <optgroup label="Danh mục GDPT 2018 tham khảo">
+              <option value="bong-da">Bóng đá</option>
+              <option value="da-cau">Đá cầu</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <div class="flex items-center gap-1">
+          <span class="font-bold text-slate-700">Khối:</span>
+          <select id="gradeSelect" onchange="onGradeChange()" class="bg-white border border-slate-300 rounded-md px-2 py-1 font-bold text-slate-800 focus:ring-1 focus:ring-emerald-500">
+            <option value="12" selected>Khối 12</option>
+            <option value="11">Khối 11</option>
+            <option value="10">Khối 10</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-7xl mx-auto px-4 py-5 flex-1 w-full">
+
+    <!-- ==================== TAB 1: GỢI Ý BÀI TẬP THỂ TRẠNG ==================== -->
+    <div id="tab-thetrang" class="tab-content block space-y-4">
+      <div class="bg-white rounded-xl p-4 md:p-5 border border-slate-200/80 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="flex items-start gap-3">
+          <div class="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 text-xl shrink-0">
+            <i class="fa-solid fa-wave-square"></i>
+          </div>
+          <div>
+            <h2 class="text-base md:text-lg font-bold text-slate-900">
+              Gợi Ý Bài Tập Thể Trạng & Hướng Dẫn Giáo Viên
+            </h2>
+            <p class="text-xs md:text-sm text-slate-600">
+              Phác đồ tập luyện cá nhân hóa theo thể lực (thừa cân, thiếu cân, bệnh nền nhẹ), kèm kỹ thuật chi tiết và cảnh báo an toàn sư phạm.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="filterStatus('overweight')" id="btn-filter-overweight" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-800 text-white shadow-sm transition">
+            THỪA CÂN / BÉO PHÌ
+          </button>
+          <button onclick="filterStatus('underweight')" id="btn-filter-underweight" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">
+            THIẾU CÂN / THỂ LỰC YẾU
+          </button>
+          <button onclick="filterStatus('mild')" id="btn-filter-mild" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">
+            Phác đồ lưu ý cho học sinh CÓ BỆNH NỀN NHẸ (Hen suyễn, tim mạch nhẹ)
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <!-- Cột trái: Chọn học sinh từ danh sách được nhập -->
+        <div class="lg:col-span-4 space-y-4">
+          <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm">
+            <div class="flex items-center justify-between text-slate-900 font-bold text-sm mb-3">
+              <span class="flex items-center gap-2">
+                <i class="fa-solid fa-sliders text-emerald-600"></i>
+                <span>THIẾT KẾ BÀI TẬP CHO HS CỤ THỂ</span>
+              </span>
+              <button onclick="switchTab('tab-hocsinh')" class="text-xs text-emerald-700 hover:underline">
+                <i class="fa-solid fa-user-plus"></i> Nhập thêm HS
+              </button>
+            </div>
+
+            <div class="space-y-3 text-xs md:text-sm">
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-1">
+                  Chọn học sinh trong lớp của <span id="currentTeacherLabel" class="text-emerald-700 font-bold">Thầy/Cô</span>:
+                </label>
+                <select id="studentSelect" onchange="onStudentSelectChange()" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2 font-medium text-slate-800 focus:ring-1 focus:ring-emerald-500">
+                  <!-- Được điền tự động từ danh sách HS nhập -->
+                </select>
+              </div>
+
+              <!-- Profile Card Học Sinh -->
+              <div id="studentProfileCard" class="bg-slate-50 border border-slate-200 rounded-lg p-3 space-y-2">
+                <div class="flex justify-between items-start">
+                  <div>
+                    <h3 class="font-bold text-slate-900 text-sm" id="profName">Lê Hoàng Long</h3>
+                    <p class="text-xs text-slate-500" id="profDetail">Lớp: 12A1 • Cao: 168 cm • Nặng: 74 kg</p>
+                  </div>
+                  <span id="profBmiBadge" class="bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded text-xs">BMI 26.2</span>
+                </div>
+                <div class="text-xs text-slate-600 bg-white p-2 rounded border border-slate-100">
+                  <span class="font-bold text-rose-700"><i class="fa-solid fa-triangle-exclamation"></i> Ghi chú y tế:</span>
+                  <span id="profNote">Thừa cân độ 1, mỏi khớp gối khi giảm chấn nhảy tiếp đất liên tục trên sân xi măng.</span>
+                </div>
+              </div>
+
+              <div class="bg-emerald-50/60 border border-emerald-200 rounded-lg p-3 text-xs space-y-1.5">
+                <div class="font-bold text-emerald-900 flex items-center gap-1.5">
+                  <i class="fa-solid fa-mobile-screen-button text-emerald-600"></i>
+                  <span>Năng lực AI & Số hỗ trợ:</span>
+                </div>
+                <p class="text-slate-600">
+                  Dùng camera điện thoại thông minh quay chế độ 60fps / Slow-motion, sử dụng AI Pose Tracking để phát hiện góc gập gối khi tiếp đất nhằm phòng ngừa chấn thương.
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Cột phải: Phác đồ chi tiết -->
+        <div class="lg:col-span-8 space-y-4">
+          <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+              <div>
+                <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
+                  HỌC SINH CÓ CHỈ SỐ BMI &gt;= 24 (LỨA TUỔI 15-18 THPT)
+                </span>
+                <h3 class="text-base md:text-lg font-bold text-slate-900 mt-1" id="regimenTitle">
+                  Phác đồ rèn luyện cho học sinh THỪA CÂN / BÉO PHÌ
+                </h3>
+              </div>
+              <button onclick="window.print()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg flex items-center gap-1.5 font-medium border border-slate-200">
+                <i class="fa-solid fa-print"></i> <span>In tài liệu</span>
+              </button>
+            </div>
+
+            <div class="bg-rose-50 border-l-4 border-rose-500 p-3.5 rounded-r-lg">
+              <div class="flex items-start gap-2">
+                <i class="fa-solid fa-triangle-exclamation text-rose-600 mt-0.5 text-sm"></i>
+                <div class="text-xs md:text-sm text-rose-900 leading-relaxed font-medium" id="coreWarningText">
+                  <strong class="uppercase text-rose-700 font-bold">Lưu ý cốt lõi cho giáo viên:</strong> TUYỆT ĐỐI KHÔNG ÉP HỌC SINH nhảy cao tiếp đất gối thẳng liên tục hoặc chạy cự ly rút đích quá dài gây sốc tim và thoái hóa sụn khớp gối sớm trên nền sân bê tông trường học[cite: 6].
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                Hệ Thống Bài Tập Thực Hành Trên Lớp (Chi Tiết Từng Bước Theo Phân Môn):
+              </h4>
+              <div class="space-y-2.5 text-xs md:text-sm" id="exerciseStepsContainer">
+                <div class="p-3 rounded-lg border border-slate-200 bg-slate-50/50">
+                  <div class="font-bold text-emerald-800 flex items-center justify-between">
+                    <span>1. Khởi động thích ứng & Căng cơ tĩnh (6 - 8 phút)</span>
+                    <span class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-normal">Nhịp tim 105 - 120 bpm</span>
+                  </div>
+                  <p class="text-slate-600 mt-1">Xoay nhẹ nhàng các khớp cổ chân, cổ tay, khớp gối có đỡ tải; ép dẻo dọc, ngang[cite: 4, 8]. Tránh gập gối đột ngột.</p>
+                </div>
+                <div class="p-3 rounded-lg border border-slate-200 bg-slate-50/50">
+                  <div class="font-bold text-emerald-800 flex items-center justify-between">
+                    <span>2. Kỹ thuật giảm áp lực tải trọng (Bóng chuyền / Bóng rổ)</span>
+                    <span class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-normal">Đồng loạt hoặc Cặp đôi</span>
+                  </div>
+                  <p class="text-slate-600 mt-1">Tập tư thế chuẩn bị, chuyền bóng cao tay tại chỗ, mô phỏng tay chạm bóng không bật nhảy; di chuyển bước trượt ngắn[cite: 3, 9].</p>
+                </div>
+                <div class="p-3 rounded-lg border border-slate-200 bg-slate-50/50">
+                  <div class="font-bold text-emerald-800 flex items-center justify-between">
+                    <span>3. Ứng dụng AI ghi nhận & Tự hồi tĩnh</span>
+                    <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-normal">Năng lực AI & Công nghệ</span>
+                  </div>
+                  <p class="text-slate-600 mt-1">Sử dụng camera AI hoặc thiết bị đếm bước để đo thời gian phục hồi nhịp tim sau bài tập.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-amber-50/80 border border-amber-200 p-3 rounded-lg text-xs space-y-1">
+              <span class="font-bold text-amber-900 flex items-center gap-1.5">
+                <i class="fa-solid fa-leaf text-amber-600"></i> Hướng dẫn sinh hoạt & Dinh dưỡng tại nhà (Bến Tre):
+              </span>
+              <p class="text-amber-800 leading-relaxed">
+                Tăng cường rau xanh, củ quả tại địa phương; uống nước lọc vừa đủ trước - trong - sau buổi tập; hạn chế uống nước ngọt đóng chai, nước dừa có gas hoặc trà sữa trước giờ tập thể chất[cite: 2, 5, 8].
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB MỚI: DANH SÁCH LỚP & HỌC SINH (NHẬP TRỰC TIẾP) ==================== -->
+    <div id="tab-hocsinh" class="tab-content hidden space-y-4">
+      <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm space-y-5">
+        
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-200 pb-3">
+          <div>
+            <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+              <i class="fa-solid fa-user-group text-teal-700"></i>
+              Quản Lý Danh Sách Lớp & Nhập Trực Tiếp Học Sinh
+            </h2>
+            <p class="text-xs text-slate-500">
+              Giáo viên trực tiếp nhập hoặc chỉnh sửa danh sách học sinh của các lớp; dữ liệu tự động cập nhật vào phác đồ thể trạng và bảng đánh giá.
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="resetDefaultStudents()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-3 py-2 rounded-lg border transition">
+              <i class="fa-solid fa-rotate-left"></i> Nạp lại mẫu chuẩn
+            </button>
+          </div>
+        </div>
+
+        <!-- Form nhập trực tiếp học sinh mới -->
+        <div class="bg-emerald-50/60 border border-emerald-200 rounded-xl p-4">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-emerald-900 mb-3 flex items-center gap-1.5">
+            <i class="fa-solid fa-plus-circle text-emerald-700"></i> Nhập Trực Tiếp Thông Tin Học Sinh Mới
+          </h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-3 text-xs">
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Lớp:</label>
+              <input type="text" id="inpClass" placeholder="Ví dụ: 12A1" value="12A1" class="w-full bg-white border border-slate-300 rounded-md p-1.5 font-medium">
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Mã HS:</label>
+              <input type="text" id="inpCode" placeholder="Ví dụ: HS12A1-09" class="w-full bg-white border border-slate-300 rounded-md p-1.5 font-medium">
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block font-semibold text-slate-700 mb-1">Họ và Tên:</label>
+              <input type="text" id="inpName" placeholder="Nhập họ tên học sinh..." class="w-full bg-white border border-slate-300 rounded-md p-1.5 font-medium">
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Chiều cao (cm):</label>
+              <input type="number" id="inpHeight" placeholder="165" class="w-full bg-white border border-slate-300 rounded-md p-1.5 font-medium">
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Cân nặng (kg):</label>
+              <input type="number" id="inpWeight" placeholder="60" class="w-full bg-white border border-slate-300 rounded-md p-1.5 font-medium">
+            </div>
+            <div class="sm:col-span-4 md:col-span-5">
+              <label class="block font-semibold text-slate-700 mb-1">Ghi chú thể trạng / Bệnh nền (nếu có):</label>
+              <input type="text" id="inpNote" placeholder="Ví dụ: Đau nhẹ khớp gối, tiền sử hen suyễn khi trời lạnh, hoặc Thể lực tốt..." class="w-full bg-white border border-slate-300 rounded-md p-1.5 font-medium">
+            </div>
+            <div class="sm:col-span-2 md:col-span-1 flex items-end">
+              <button onclick="addStudentDirect()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-1.5 px-3 rounded-md transition shadow text-xs flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-check"></i> Lưu Học Sinh
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bảng danh sách học sinh hiện có trong lớp -->
+        <div class="space-y-2">
+          <div class="flex items-center justify-between">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700">
+              Danh Sách Học Sinh Hiện Tại (<span id="totalStudentsCount">0</span> học sinh)
+            </h3>
+            <div class="flex items-center gap-2 text-xs">
+              <span>Lọc theo lớp:</span>
+              <select id="filterClassSelect" onchange="renderStudentTable()" class="bg-white border border-slate-300 rounded px-2 py-1 font-semibold text-slate-800">
+                <option value="ALL">Tất cả các lớp</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto border border-slate-200 rounded-lg">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead class="bg-slate-100 text-slate-700 font-bold uppercase text-[11px] border-b">
+                <tr>
+                  <th class="p-2.5">STT</th>
+                  <th class="p-2.5">Lớp</th>
+                  <th class="p-2.5">Mã HS</th>
+                  <th class="p-2.5">Họ và Tên</th>
+                  <th class="p-2.5">Chiều cao / Cân nặng</th>
+                  <th class="p-2.5">Chỉ số BMI</th>
+                  <th class="p-2.5">Phân loại thể lực</th>
+                  <th class="p-2.5">Ghi chú y tế & thể trạng</th>
+                  <th class="p-2.5 text-center">Thao tác</th>
+                </tr>
+              </thead>
+              <tbody id="studentTableBody" class="divide-y divide-slate-200 bg-white">
+                <!-- Được JS tạo động -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== TAB 3: SOẠN KẾ HOẠCH BÀI DẠY (AI) ==================== -->
+    <div id="tab-khbd" class="tab-content hidden space-y-4">
+      <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-200 pb-3">
+          <div>
+            <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+              <i class="fa-solid fa-robot text-emerald-700"></i>
+              Kế Hoạch Bài Dạy GDTC 2018 - Tích Hợp Năng Lực Số & Năng Lực AI
+            </h2>
+            <p class="text-xs text-slate-500">
+              Cấu trúc khung chuẩn theo Công văn 5512 & 7991/BGDĐT • Trường THPT Huỳnh Tấn Phát
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="generateLessonPlanAI()" class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-3.5 py-2 rounded-lg flex items-center gap-1.5 shadow transition">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> <span>Tạo KHBD Tự Động</span>
+            </button>
+            <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold px-3 py-2 rounded-lg flex items-center gap-1.5 transition">
+              <i class="fa-solid fa-file-pdf"></i> <span>Xuất Bản In</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 bg-slate-50 p-3 rounded-lg border border-slate-200 text-xs">
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Chọn nội dung theo PPCT đính kèm:</label>
+            <select id="lessonTopicSelect" onchange="renderSpecificLessonPlan()" class="w-full bg-white border border-slate-300 rounded p-1.5 font-medium"></select>
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Mức độ tích hợp năng lực AI:</label>
+            <select id="aiCompetencyLevel" class="w-full bg-white border border-slate-300 rounded p-1.5 font-medium">
+              <option value="tracking">Phân tích chuyển động qua Video AI (Slow-motion / Tracking)</option>
+              <option value="cardio">Ứng dụng AI đo nhịp tim & Tải lượng vận động</option>
+              <option value="form">Đối chiếu khung xương sinh cơ học mẫu (Pose Estimation)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Thời lượng & Tiết dạy:</label>
+            <input type="text" id="lessonDuration" value="Tiết 1-2 (Thời lượng: 45 phút/tiết)" class="w-full bg-white border border-slate-300 rounded p-1.5 font-medium">
+          </div>
+        </div>
+
+        <div id="lessonPlanOutput" class="bg-white border border-slate-300 rounded-xl p-6 text-slate-800 text-sm leading-relaxed space-y-4 shadow-inner"></div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 4: ĐÁNH GIÁ THƯỜNG XUYÊN ==================== -->
+    <div id="tab-danhgia" class="tab-content hidden space-y-4">
+      <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm space-y-4">
+        <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+          <h2 class="text-base md:text-lg font-bold text-slate-900">
+            Sổ Đánh Giá Thường Xuyên Theo Thông Tư 22 & GDPT 2018
+          </h2>
+          <span class="text-xs bg-blue-50 text-blue-700 font-semibold px-2.5 py-1 rounded-md">Bộ môn Giáo dục Thể chất</span>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs md:text-sm border border-slate-200 rounded-lg">
+            <thead class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200 uppercase text-[11px]">
+              <tr>
+                <th class="p-3">Mã HS</th>
+                <th class="p-3">Lớp</th>
+                <th class="p-3">Họ và Tên</th>
+                <th class="p-3">Thể trạng (BMI)</th>
+                <th class="p-3">Thực hiện kỹ thuật</th>
+                <th class="p-3">Thái độ & Tinh thần</th>
+                <th class="p-3">Xếp loại</th>
+              </tr>
+            </thead>
+            <tbody id="assessmentTableBody" class="divide-y divide-slate-200">
+              <!-- Đồng bộ từ danh sách học sinh -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 5: MÁY TÍNH BMI ==================== -->
+    <div id="tab-bmi" class="tab-content hidden space-y-4">
+      <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm max-w-2xl mx-auto space-y-4">
+        <h2 class="text-base md:text-lg font-bold text-slate-900 flex items-center gap-2 border-b pb-2">
+          <i class="fa-solid fa-calculator text-teal-600"></i>
+          Đánh Giá Thể Trạng BMI Lứa Tuổi Học Sinh THPT (15 - 18 Tuổi)
+        </h2>
+        <div class="grid grid-cols-2 gap-4 text-xs md:text-sm">
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Chiều cao (cm):</label>
+            <input type="number" id="bmiHeight" value="165" class="w-full bg-slate-50 border rounded-lg p-2 font-medium">
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Cân nặng (kg):</label>
+            <input type="number" id="bmiWeight" value="68" class="w-full bg-slate-50 border rounded-lg p-2 font-medium">
+          </div>
+        </div>
+        <button onclick="calculateBMI()" class="w-full bg-teal-700 hover:bg-teal-800 text-white font-bold py-2 rounded-lg text-sm transition">
+          Tính Toán & Nhận Phác Đồ An Toàn Sư Phạm
+        </button>
+        <div id="bmiResultBox" class="p-4 rounded-lg bg-slate-50 border border-slate-200 text-xs md:text-sm space-y-2 hidden"></div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 6: DINH DƯỠNG NÔNG THÔN ==================== -->
+    <div id="tab-dinhduong" class="tab-content hidden space-y-4">
+      <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm space-y-4">
+        <div class="border-b pb-2">
+          <h2 class="text-base md:text-lg font-bold text-slate-900 flex items-center gap-2">
+            <i class="fa-solid fa-bowl-rice text-orange-600"></i>
+            Chuyên Đề: Dinh Dưỡng Nông Thôn Cho Học Sinh THPT Vận Động Thể Chất
+          </h2>
+          <p class="text-xs text-slate-500">Phù hợp điều kiện Bến Tre (nguồn đạm, xơ, khoáng tại chỗ)</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs md:text-sm">
+          <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-200">
+            <h3 class="font-bold text-emerald-900 mb-2"><i class="fa-solid fa-drumstick-bite"></i> Nguồn Đạm Địa Phương</h3>
+            <p class="text-slate-600 leading-relaxed">
+              Cá sông (cá lóc, cá rô, cá basa), trứng gà vịt thả vườn, đậu hũ, đậu phộng, các loại đậu đỗ nấu chè thanh đạm phục hồi cơ bắp[cite: 5].
+            </p>
+          </div>
+          <div class="p-4 bg-amber-50 rounded-xl border border-amber-200">
+            <h3 class="font-bold text-amber-900 mb-2"><i class="fa-solid fa-faucet-drip"></i> Bù Nước & Khoáng Tự Nhiên</h3>
+            <p class="text-slate-600 leading-relaxed">
+              Nước dừa tươi xiêm dồi dào kali và điện giải tự nhiên[cite: 5]. Uống sau buổi tập 15-20 phút, không nên uống đá lạnh ồ ạt ngay khi vừa chạy xong[cite: 5, 8].
+            </p>
+          </div>
+          <div class="p-4 bg-blue-50 rounded-xl border border-blue-200">
+            <h3 class="font-bold text-blue-900 mb-2"><i class="fa-solid fa-carrot"></i> Vitamin & Tinh Bột Lành</h3>
+            <p class="text-slate-600 leading-relaxed">
+              Khoai lang, bắp ngô luộc, rau ngót, đọt nhãn lồng, chuối xiêm chín; cung cấp glycogen ổn định cho hệ vận động bền bỉ[cite: 5, 8].
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 7: THÔNG BÁO PHỤ HUYNH ==================== -->
+    <div id="tab-phuhuynh" class="tab-content hidden space-y-4">
+      <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm max-w-3xl mx-auto space-y-4">
+        <div class="flex items-center justify-between border-b pb-3">
+          <h2 class="text-base md:text-lg font-bold text-slate-900 flex items-center gap-2">
+            <i class="fa-brands fa-whatsapp text-emerald-600"></i>
+            Mô Phỏng Tin Nhắn Gửi Phụ Huynh (Zalo / SMS Edu)
+          </h2>
+          <span class="text-xs bg-rose-100 text-rose-800 font-bold px-2 py-0.5 rounded">Tin tức sức khỏe</span>
+        </div>
+        <div class="space-y-3">
+          <div class="p-3.5 bg-slate-50 border rounded-lg text-xs md:text-sm space-y-2">
+            <div class="flex justify-between items-center text-slate-500 text-xs">
+              <span class="font-bold text-slate-700">Người gửi: <span id="zaloSenderName">Nguyễn Trung Hiếu</span></span>
+              <span>10:30 Hôm nay</span>
+            </div>
+            <div class="bg-white p-3 rounded-lg border border-slate-200 text-slate-800 space-y-1.5 shadow-sm">
+              <p class="font-semibold text-emerald-800" id="zaloMsgGreeting">Kính gửi Phụ huynh em Lê Hoàng Long,</p>
+              <p id="zaloMsgContent">Hôm nay trong tiết Giáo dục thể chất, nhà trường đã kiểm tra chỉ số vận động của em. Thể trạng em phát triển tốt, tuy nhiên em hơi thừa cân và có dấu hiệu căng cơ gối khi tiếp đất mạnh. Giáo viên đã điều chỉnh giáo án riêng, không bắt em nhảy quá sức. Nhờ quý Phụ huynh phối hợp nhắc em hạn chế nước ngọt có gas và ngủ đủ giấc.</p>
+            </div>
+            <div class="flex justify-end gap-2">
+              <button onclick="alert('Đã gửi thông báo thành công qua tin nhắn Zalo Phụ huynh!')" class="bg-emerald-700 text-white font-semibold px-3 py-1.5 rounded text-xs flex items-center gap-1">
+                <i class="fa-solid fa-paper-plane"></i> Gửi ngay qua Zalo OA
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 text-slate-400 text-xs py-4 border-t border-slate-800 mt-auto no-print">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-2 text-center md:text-left">
+      <div>
+        <p class="font-semibold text-slate-200">TRƯỜNG TRUNG HỌC PHỔ THÔNG HUỲNH TẤN PHÁT</p>
+        <p>Bộ môn: Giáo dục Thể chất • Thiết kế hỗ trợ chuyên môn GDPT 2018 & Chuyển đổi số Sư phạm</p>
+      </div>
+      <div class="text-slate-400">
+        <span>Danh sách GV: Nguyễn Tấn Phước, Bồ Công Lâm, Nguyễn Trung Hiếu, Bùi Thanh Liêm, Cao Minh Thắng, Phạm Thị Ngọc Du, Võ Thị Yến Lan</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT LOGIC JAVASCRIPT ĐỒNG BỘ -->
+  <script>
+    // Dữ liệu học sinh mặc định ban đầu
+    const defaultStudents = [
+      { id: '1', class: '12A1', code: 'HS12A1-03', name: 'Lê Hoàng Long', height: 168, weight: 74, note: 'Thừa cân độ 1, mỏi khớp gối khi nhảy tiếp đất trên sân bê tông.' },
+      { id: '2', class: '12A1', code: 'HS12A1-15', name: 'Trần Văn Minh', height: 172, weight: 48, note: 'Thiếu cân, thể lực cánh tay còn yếu, nhanh mệt khi tập liên tục.' },
+      { id: '3', class: '12A1', code: 'HS12A1-21', name: 'Nguyễn Thị Lan', height: 158, weight: 49, note: 'Tiền sử hen phế quản nhẹ khi thời tiết lạnh hoặc bụi sân.' },
+      { id: '4', class: '12A2', code: 'HS12A2-08', name: 'Võ Nhật Nam', height: 170, weight: 60, note: 'Thể lực đạt chuẩn, sức bền và độ khéo léo tốt.' },
+      { id: '5', class: '11B1', code: 'HS11B1-05', name: 'Đặng Quốc Bảo', height: 165, weight: 69, note: 'Hơi thừa cân, tích cực tham gia các bài tập bóng chuyền.' }
+    ];
+
+    // Lấy dữ liệu từ localStorage hoặc dùng mặc định
+    let students = JSON.parse(localStorage.getItem('gdtc_students')) || defaultStudents;
+
+    // Dữ liệu phân môn GDPT 2018
+    const curriculumData = {
+      'bong-chuyen': {
+        name: 'Bóng chuyền',
+        lessons: [
+          {
+            title: 'Sử dụng các yếu tố tự nhiên, dinh dưỡng & Kế hoạch tập luyện môn Bóng chuyền',
+            classRef: 'Khối 12 - Tuần 1, Tiết 1-2',
+            sgkRef: 'KNTT 12, Tr. 4, 11',
+            objective: 'Hiểu vai trò của bóng chuyền với sức khỏe, biết lập kế hoạch tập luyện cá nhân.',
+            newKnowledge: 'Tác động của ánh sáng, không khí, nhiệt độ; các nhóm chất dinh dưỡng cần thiết cho VĐV bóng chuyền.',
+            practice: 'Thảo luận nhóm xây dựng kế hoạch tập luyện trong ngày và tuần theo bảng mẫu SGK Tr. 15.',
+            aiDigital: 'Học sinh dùng ứng dụng ghi chú hoặc bảng tính điện tử để lập Kế hoạch rèn luyện cá nhân số hóa.'
+          },
+          {
+            title: 'Kĩ thuật phát bóng thấp tay nghiêng mình',
+            classRef: 'Khối 12 - Bài 2',
+            sgkRef: 'KNTT 12, Tr. 26',
+            objective: 'Thực hiện đúng kỹ thuật tung bóng và đánh bóng tiếp xúc chuẩn xác; sửa được lỗi đánh lệch hướng.',
+            newKnowledge: 'TTCB: đứng nghiêng với lưới; tung bóng thẳng ổn định; vung tay đánh sau dưới tâm bóng.',
+            practice: 'Bài 1: Mô phỏng không bóng; Bài 2: Tiếp xúc bóng treo; Bài 3: Phát bóng vào tường 5-6m; Bài 4: Phát bóng qua lưới 3m, 6m.',
+            aiDigital: 'Quay video slow-motion góc vung tay; AI nhận diện điểm chạm bóng đúng tâm bàn tay.'
+          },
+          {
+            title: 'Kĩ thuật nhoài người đỡ bóng bằng một tay',
+            classRef: 'Khối 11 - Bài 1',
+            sgkRef: 'KNTT 11, Tr. 18-19',
+            objective: 'Thực hiện đúng kỹ thuật bước nhoài hạ thấp trọng tâm đỡ bóng cứu nguy; tiếp đất an toàn tránh chấn thương.',
+            newKnowledge: 'Kỹ thuật nhoài người đỡ bóng một tay và nguyên tắc cuộn vai/chống tay an toàn.',
+            practice: 'Tập mô phỏng tại chỗ -> Đi chậm kết hợp nhoài người -> Tung và đỡ bóng cặp đôi cách nhau 4-5m.',
+            aiDigital: 'Sử dụng camera phân tích góc gập khớp gối và thời điểm với tay cứu bóng.'
+          }
+        ]
+      },
+      'bong-ro': {
+        name: 'Bóng rổ',
+        lessons: [
+          {
+            title: 'Kĩ thuật di chuyển & Kế hoạch tập luyện môn Bóng rổ',
+            classRef: 'Khối 12 - Tiết 1-4',
+            sgkRef: 'KNTT 12, Tr. 11, 14',
+            objective: 'Hiểu vai trò môn bóng rổ; thành thạo các bước chạy đổi hướng, dừng bóng và lập kế hoạch rèn luyện.',
+            newKnowledge: 'Tác dụng phát triển chiều cao, sức bền và phản xạ linh hoạt; các lỗi chạy bước.',
+            practice: 'Tập chạy zíc zắc qua cọc tiêu; thảo luận nhóm lập kế hoạch tập luyện tuần.',
+            aiDigital: 'Tạo nhật ký rèn luyện thể lực số bằng biểu mẫu Google Form / Excel AI.'
+          },
+          {
+            title: 'Kĩ thuật nhảy dừng bắt bóng và xoay chân trụ',
+            classRef: 'Khối 11 - Bài 2',
+            sgkRef: 'KNTT 11, Tr. 25, 29',
+            objective: 'Bắt bóng trên không chuẩn xác, tiếp đất bằng 2 chân vững chãi không bị phạm luật chạy bước.',
+            newKnowledge: 'Quy tắc chân trụ và các hướng xoay chân thoát khỏi đối phương phòng thủ.',
+            practice: 'Nhảy dừng bắt bóng do bạn chuyền -> Xoay chân trụ 180 độ -> Trò chơi Ai xoay nhanh hơn.',
+            aiDigital: 'AI nhận diện phát hiện lỗi nhấc chân trụ trước khi bóng rời tay.'
+          }
+        ]
+      },
+      'cau-long': {
+        name: 'Cầu lông',
+        lessons: [
+          {
+            title: 'Kĩ thuật di chuyển tiến chéo và lùi chéo bên phải, bên trái',
+            classRef: 'Khối 11 - Chủ đề 2, 5',
+            sgkRef: 'KNTT 11, Tr. 18, 36',
+            objective: 'Thực hiện bước di chuyển nhịp nhàng đón cầu; giữ trọng tâm cân bằng khi thu vợt về TTCB.',
+            newKnowledge: 'TTCB: hai chân rộng bằng vai, gối khuỵu; bước trượt kết hợp bước chéo linh hoạt.',
+            practice: 'Di chuyển tiến lùi theo khẩu lệnh chỉ huy -> Di chuyển nhặt cầu đặt góc sân.',
+            aiDigital: 'Sử dụng cảm biến bước chân hoặc camera AI theo dõi thời gian bao quát 4 góc sân.'
+          },
+          {
+            title: 'Kĩ thuật bỏ nhỏ trái tay',
+            classRef: 'Khối 11 - Chủ đề 3',
+            sgkRef: 'KNTT 11, Tr. 39-40',
+            objective: 'Thực hiện thành thạo cú ve vuốt cầu sát mép lưới đối phương rơi khu vực 1.98m.',
+            newKnowledge: 'Cầm vợt lỏng tay; mặt vợt hơi nghiêng chạm nhẹ vào đế cầu đưa cầu bay sát mép trên của lưới.',
+            practice: 'Tập bỏ nhỏ vào cầu treo -> Đánh cầu do bạn tung đến khu vực 1.98m.',
+            aiDigital: 'Dùng camera AI ghi lại điểm rơi của cầu vào ô mục tiêu để chấm điểm tự động.'
+          }
+        ]
+      },
+      'bong-da': {
+        name: 'Bóng đá',
+        lessons: [
+          {
+            title: 'Kĩ thuật đá bóng bằng lòng bàn chân và mu bàn chân',
+            classRef: 'Khối 10, 11 - Chương trình GDPT 2018',
+            sgkRef: 'SGK GDTC 2018',
+            objective: 'Thực hiện chính xác kỹ thuật đặt chân trụ, hướng mũi chân và tiếp xúc tâm quả bóng.',
+            newKnowledge: 'Chân trụ đặt cách bóng 15-20cm, tay thăng bằng, gập gối tạo lực truyền dẫn từ đùi xuống mu bàn chân.',
+            practice: 'Đá bóng vào tường cự ly 5m -> Chuyền bóng cặp đôi di chuyển dọc biên.',
+            aiDigital: 'Camera AI nhận diện góc đặt bàn chân trụ so với tâm bóng.'
+          }
+        ]
+      },
+      'da-cau': {
+        name: 'Đá cầu',
+        lessons: [
+          {
+            title: 'Kĩ thuật tâng cầu bằng mu bàn chân và phát cầu cao chân',
+            classRef: 'Khối 10, 11 - Chương trình GDPT 2018',
+            sgkRef: 'SGK GDTC 2018',
+            objective: 'Khống chế đường bay của quả cầu ổn định; phát cầu qua lưới chính xác vào ô đối phương.',
+            newKnowledge: 'Mắt quan sát điểm rơi của cầu; nâng đùi vuông góc đón cầu bằng mu bàn chân.',
+            practice: 'Tâng cầu cá nhân liên tục 15-20 lần -> Phát cầu qua lưới cự ly 4m.',
+            aiDigital: 'Ứng dụng AI đếm số lần tâng cầu liên tục không chạm đất qua camera.'
+          }
+        ]
+      }
+    };
+
+    // Hàm tính BMI
+    function getBMI(w, h) {
+      if (!w || !h || h <= 0) return 0;
+      return (w / ((h / 100) * (h / 100))).toFixed(1);
+    }
+
+    // Hàm phân loại thể lực theo BMI
+    function getBMICategory(bmi) {
+      if (bmi < 18.5) return { text: 'Thiếu cân / Thể lực yếu', type: 'underweight', badge: 'bg-blue-100 text-blue-800' };
+      if (bmi < 23) return { text: 'Bình thường (Đạt chuẩn)', type: 'normal', badge: 'bg-emerald-100 text-emerald-800' };
+      if (bmi < 25) return { text: 'Tiền thừa cân', type: 'overweight', badge: 'bg-amber-100 text-amber-800' };
+      return { text: 'Thừa cân / Béo phì', type: 'overweight', badge: 'bg-rose-100 text-rose-800' };
+    }
+
+    // Nhập trực tiếp học sinh mới
+    function addStudentDirect() {
+      const cls = document.getElementById('inpClass').value.trim();
+      const code = document.getElementById('inpCode').value.trim() || `HS-${Date.now().toString().slice(-4)}`;
+      const name = document.getElementById('inpName').value.trim();
+      const height = parseFloat(document.getElementById('inpHeight').value);
+      const weight = parseFloat(document.getElementById('inpWeight').value);
+      const note = document.getElementById('inpNote').value.trim() || 'Thể trạng bình thường.';
+
+      if (!cls || !name || !height || !weight) {
+        alert("Vui lòng nhập đầy đủ Lớp, Họ tên, Chiều cao và Cân nặng của học sinh!");
+        return;
+      }
+
+      const newStudent = {
+        id: Date.now().toString(),
+        class: cls,
+        code: code,
+        name: name,
+        height: height,
+        weight: weight,
+        note: note
+      };
+
+      students.push(newStudent);
+      saveStudentsToStorage();
+      syncAllStudentViews();
+
+      // Reset form
+      document.getElementById('inpName').value = '';
+      document.getElementById('inpCode').value = '';
+      document.getElementById('inpHeight').value = '';
+      document.getElementById('inpWeight').value = '';
+      document.getElementById('inpNote').value = '';
+      alert(`Đã thêm thành công học sinh ${name} (Lớp ${cls})!`);
+    }
+
+    // Xóa học sinh
+    function deleteStudent(id) {
+      if (confirm("Thầy/Cô có chắc chắn muốn xóa học sinh này khỏi danh sách?")) {
+        students = students.filter(s => s.id !== id);
+        saveStudentsToStorage();
+        syncAllStudentViews();
+      }
+    }
+
+    // Nạp lại danh sách chuẩn
+    function resetDefaultStudents() {
+      if (confirm("Khôi phục danh sách học sinh mẫu ban đầu?")) {
+        students = [...defaultStudents];
+        saveStudentsToStorage();
+        syncAllStudentViews();
+      }
+    }
+
+    // Lưu vào LocalStorage
+    function saveStudentsToStorage() {
+      localStorage.setItem('gdtc_students', JSON.stringify(students));
+    }
+
+    // Đồng bộ toàn bộ các bảng và dropdown học sinh
+    function syncAllStudentViews() {
+      renderStudentTable();
+      populateStudentSelectDropdown();
+      renderAssessmentTable();
+      updateClassFilterDropdown();
+    }
+
+    // Cập nhật bộ lọc lớp học
+    function updateClassFilterDropdown() {
+      const select = document.getElementById('filterClassSelect');
+      const currentVal = select.value;
+      const classes = [...new Set(students.map(s => s.class))];
+
+      select.innerHTML = '<option value="ALL">Tất cả các lớp</option>';
+      classes.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.innerText = `Lớp ${c}`;
+        if (c === currentVal) opt.selected = true;
+        select.appendChild(opt);
+      });
+    }
+
+    // Vẽ bảng quản lý học sinh trực tiếp
+    function renderStudentTable() {
+      const tbody = document.getElementById('studentTableBody');
+      const filterClass = document.getElementById('filterClassSelect').value;
+      tbody.innerHTML = '';
+
+      const filtered = (filterClass === 'ALL') ? students : students.filter(s => s.class === filterClass);
+      document.getElementById('totalStudentsCount').innerText = filtered.length;
+
+      filtered.forEach((s, idx) => {
+        const bmi = getBMI(s.weight, s.height);
+        const cat = getBMICategory(bmi);
+
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-50 transition border-b";
+        tr.innerHTML = `
+          <td class="p-2.5 font-medium text-slate-500">${idx + 1}</td>
+          <td class="p-2.5 font-bold text-slate-800">${s.class}</td>
+          <td class="p-2.5 text-slate-600 font-semibold">${s.code}</td>
+          <td class="p-2.5 font-bold text-slate-900">${s.name}</td>
+          <td class="p-2.5">${s.height} cm / ${s.weight} kg</td>
+          <td class="p-2.5 font-black text-slate-800">${bmi}</td>
+          <td class="p-2.5"><span class="${cat.badge} font-bold px-2 py-0.5 rounded text-[11px]">${cat.text}</span></td>
+          <td class="p-2.5 text-slate-600 italic">${s.note}</td>
+          <td class="p-2.5 text-center">
+            <button onclick="deleteStudent('${s.id}')" class="text-rose-600 hover:text-rose-800 p-1 font-bold" title="Xóa học sinh">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Đổ danh sách học sinh vào Dropdown chọn của Tab Gợi Ý Thể Trạng
+    function populateStudentSelectDropdown() {
+      const select = document.getElementById('studentSelect');
+      select.innerHTML = '';
+
+      students.forEach(s => {
+        const bmi = getBMI(s.weight, s.height);
+        const opt = document.createElement('option');
+        opt.value = s.id;
+        opt.innerText = `${s.name} (${s.class} - ${s.code} • BMI ${bmi})`;
+        select.appendChild(opt);
+      });
+
+      if (students.length > 0) {
+        onStudentSelectChange();
+      }
+    }
+
+    // Khi chọn học sinh ở Tab Gợi Ý Thể Trạng
+    function onStudentSelectChange() {
+      const id = document.getElementById('studentSelect').value;
+      const s = students.find(item => item.id === id) || students[0];
+      if (!s) return;
+
+      const bmi = getBMI(s.weight, s.height);
+      const cat = getBMICategory(bmi);
+
+      document.getElementById('profName').innerText = s.name;
+      document.getElementById('profDetail').innerText = `Lớp: ${s.class} • Cao: ${s.height} cm • Nặng: ${s.weight} kg`;
+      document.getElementById('profBmiBadge').innerText = `BMI ${bmi}`;
+      document.getElementById('profBmiBadge').className = `${cat.badge} font-bold px-2 py-0.5 rounded text-xs`;
+      document.getElementById('profNote').innerText = s.note;
+
+      // Cập nhật Zalo mock
+      document.getElementById('zaloMsgGreeting').innerText = `Kính gửi Phụ huynh em ${s.name} (Lớp ${s.class}),`;
+
+      if (cat.type === 'overweight') {
+        filterStatus('overweight');
+        document.getElementById('zaloMsgContent').innerText = `Hôm nay trong tiết GDTC, em ${s.name} có biểu hiện nhanh mỏi khớp gối khi tiếp đất do thể trạng hơi thừa cân. Giáo viên đã linh hoạt giảm tải bài tập bật nhảy. Kính nhờ gia đình phối hợp nhắc em hạn chế nước ngọt và tăng cường vận động nhẹ tại nhà.`;
+      } else if (cat.type === 'underweight') {
+        filterStatus('underweight');
+        document.getElementById('zaloMsgContent').innerText = `Trong tiết học GDTC, em ${s.name} tham gia nhiệt tình nhưng thể lực cánh tay còn hơi yếu và mau mệt. Kính nhờ phụ huynh bồi dưỡng thêm bữa phụ và nguồn đạm tại chỗ (trứng, cá sông, sữa) cho em.`;
+      } else {
+        if (s.note.toLowerCase().includes('hen') || s.note.toLowerCase().includes('tim')) {
+          filterStatus('mild');
+        } else {
+          filterStatus('standard');
+        }
+      }
+    }
+
+    // Đổ danh sách vào Sổ Đánh Giá Thường Xuyên
+    function renderAssessmentTable() {
+      const tbody = document.getElementById('assessmentTableBody');
+      tbody.innerHTML = '';
+
+      students.forEach(s => {
+        const bmi = getBMI(s.weight, s.height);
+        const cat = getBMICategory(bmi);
+
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-50";
+        tr.innerHTML = `
+          <td class="p-3 font-semibold text-slate-600">${s.code}</td>
+          <td class="p-3 font-bold text-slate-700">${s.class}</td>
+          <td class="p-3 font-bold text-slate-900">${s.name}</td>
+          <td class="p-3"><span class="${cat.badge} px-2 py-0.5 rounded text-xs">${bmi} - ${cat.text}</span></td>
+          <td class="p-3">Nắm vững yếu lĩnh động tác, di chuyển cự ly hợp lý</td>
+          <td class="p-3">Tích cực, trung thực, tinh thần vượt khó cao</td>
+          <td class="p-3 font-bold text-emerald-700">Đạt (Đ)</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Chuyển Tab
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => {
+        el.classList.add('hidden');
+        el.classList.remove('block');
+      });
+      
+      const target = document.getElementById(tabId);
+      if (target) {
+        target.classList.remove('hidden');
+        target.classList.add('block');
+      }
+
+      document.querySelectorAll('.nav-tab').forEach(btn => {
+        btn.classList.remove('bg-emerald-800', 'text-white', 'shadow-sm');
+        btn.classList.add('text-slate-600');
+      });
+
+      const activeBtn = document.getElementById('btn-' + tabId);
+      if (activeBtn) {
+        activeBtn.classList.remove('text-slate-600');
+        activeBtn.classList.add('bg-emerald-800', 'text-white', 'shadow-sm');
+      }
+    }
+
+    function handleRoleChange() {
+      const role = document.getElementById('userRole').value;
+      const gvSelect = document.getElementById('gvSelect');
+      const input = document.getElementById('customUserName');
+
+      if (role === 'gv') {
+        gvSelect.classList.remove('hidden');
+        input.placeholder = "Nhập họ tên giáo viên...";
+        if (gvSelect.value !== 'custom') {
+          input.value = gvSelect.value;
+        }
+      } else {
+        gvSelect.classList.add('hidden');
+        input.placeholder = "Nhập họ tên học sinh...";
+        input.value = students.length > 0 ? students[0].name : "Học sinh";
+      }
+      updateUserTitle();
+    }
+
+    function selectTeacher(name) {
+      const input = document.getElementById('customUserName');
+      if (name === 'custom') {
+        input.value = '';
+        input.focus();
+      } else {
+        input.value = name;
+      }
+      updateUserTitle();
+    }
+
+    function updateUserTitle() {
+      const role = document.getElementById('userRole').value;
+      const name = document.getElementById('customUserName').value.trim() || (role === 'gv' ? 'Giáo viên GDTC' : 'Học sinh');
+      const rolePrefix = role === 'gv' ? 'Giáo viên: ' : 'Học sinh: ';
+      
+      document.getElementById('headerUserDisplay').innerText = rolePrefix + name;
+      document.getElementById('currentTeacherLabel').innerText = name;
+      document.getElementById('zaloSenderName').innerText = name;
+      renderSpecificLessonPlan();
+    }
+
+    function onSportChange() {
+      const sportKey = document.getElementById('sportSelect').value;
+      const sportObj = curriculumData[sportKey];
+      document.getElementById('headerCurSubj').innerText = 'CHUYÊN MÔN ' + sportObj.name.toUpperCase();
+      populateLessonSelect(sportKey);
+      renderSpecificLessonPlan();
+    }
+
+    function onGradeChange() {
+      renderSpecificLessonPlan();
+    }
+
+    function populateLessonSelect(sportKey) {
+      const select = document.getElementById('lessonTopicSelect');
+      select.innerHTML = '';
+      const sportObj = curriculumData[sportKey];
+
+      if (sportObj && sportObj.lessons) {
+        sportObj.lessons.forEach((l, idx) => {
+          const opt = document.createElement('option');
+          opt.value = idx;
+          opt.innerText = `[${l.classRef}] - ${l.title}`;
+          select.appendChild(opt);
+        });
+      }
+    }
+
+    function renderSpecificLessonPlan() {
+      const sportKey = document.getElementById('sportSelect').value;
+      const lessonIdx = document.getElementById('lessonTopicSelect').value || 0;
+      const sport = curriculumData[sportKey];
+      const lesson = sport.lessons[lessonIdx] || sport.lessons[0];
+      const userName = document.getElementById('customUserName').value.trim() || "Nguyễn Trung Hiếu";
+      const role = document.getElementById('userRole').value;
+      const userTitle = role === 'gv' ? 'Giáo viên thực hiện' : 'Học sinh tự lập';
+      const grade = document.getElementById('gradeSelect').value;
+
+      const html = `
+        <div class="border-b-2 border-slate-900 pb-3 text-center space-y-1">
+          <p class="font-bold text-xs uppercase tracking-wider text-slate-700">TRƯỜNG TRUNG HỌC PHỔ THÔNG HUỲNH TẤN PHÁT</p>
+          <p class="text-xs font-semibold text-slate-600">BỘ MÔN: GIÁO DỤC THỂ CHẤT • KHỐI ${grade}</p>
+          <h2 class="text-base md:text-xl font-black text-slate-900 uppercase mt-2">KẾ HOẠCH BÀI DẠY (CV 5512 & 7991)</h2>
+          <p class="text-xs md:text-sm font-bold text-emerald-800">${lesson.title.toUpperCase()}</p>
+          <p class="text-xs text-slate-500 italic">(${userTitle}: <strong>${userName}</strong> • Phân môn: ${sport.name} • Căn cứ: ${lesson.sgkRef})</p>
+        </div>
+
+        <div class="space-y-4 pt-3">
+          <div>
+            <h3 class="font-bold text-emerald-900 text-sm flex items-center gap-1.5 uppercase">
+              <i class="fa-solid fa-bullseye text-emerald-700"></i> I. MỤC TIÊU BÀI HỌC
+            </h3>
+            <ul class="list-disc list-inside text-xs md:text-sm space-y-1 mt-1 text-slate-700 ml-2">
+              <li><strong>Năng lực đặc thù:</strong> ${lesson.objective}</li>
+              <li><strong>Năng lực số & AI:</strong> Học sinh biết sử dụng thiết bị quay hình xem lại chế độ Slow-motion, sử dụng AI đo vận tốc và khung xương sinh cơ học.</li>
+              <li><strong>Phẩm chất:</strong> Đoàn kết, an toàn sư phạm và tự giác vượt khó rèn luyện.</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="font-bold text-emerald-900 text-sm flex items-center gap-1.5 uppercase">
+              <i class="fa-solid fa-boxes-stacked text-emerald-700"></i> II. TIẾN TRÌNH DẠY HỌC & CÔNG NGHỆ SỐ
+            </h3>
+            <div class="mt-2 space-y-2">
+              <div class="border border-slate-200 rounded-lg p-2.5 bg-slate-50">
+                <span class="font-bold text-xs uppercase text-emerald-800">1. Mở đầu & Khởi động (8-10 phút):</span>
+                <p class="text-xs text-slate-700 mt-0.5">Kiểm tra sĩ số, bệnh nền học sinh; khởi động xoay khớp cổ tay, chân, vai, gối có tải trọng nhẹ[cite: 4, 8].</p>
+              </div>
+              <div class="border border-slate-200 rounded-lg p-2.5 bg-slate-50">
+                <span class="font-bold text-xs uppercase text-emerald-800">2. Kiến thức mới (12-15 phút):</span>
+                <p class="text-xs text-slate-700 mt-0.5">${lesson.newKnowledge}</p>
+              </div>
+              <div class="border border-slate-200 rounded-lg p-2.5 bg-slate-50">
+                <span class="font-bold text-xs uppercase text-emerald-800">3. Luyện tập (15-18 phút):</span>
+                <p class="text-xs text-slate-700 mt-0.5">${lesson.practice} (Học sinh dùng điện thoại quay video 10 giây đối chiếu chuyển động bằng AI).</p>
+              </div>
+              <div class="border border-slate-200 rounded-lg p-2.5 bg-slate-50">
+                <span class="font-bold text-xs uppercase text-emerald-800">4. Vận dụng & Hồi tĩnh (5 phút):</span>
+                <p class="text-xs text-slate-700 mt-0.5">Thả lỏng toàn thân, hướng dẫn dinh dưỡng địa phương và lập kế hoạch tập luyện tuần[cite: 2, 5].</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      document.getElementById('lessonPlanOutput').innerHTML = html;
+    }
+
+    function generateLessonPlanAI() {
+      renderSpecificLessonPlan();
+      alert("Đã cập nhật Kế hoạch bài dạy tích hợp Năng lực Số & Năng lực AI theo Thông tư 5512/7991 mới nhất!");
+    }
+
+    function filterStatus(status) {
+      const regTitle = document.getElementById('regimenTitle');
+      const coreWarning = document.getElementById('coreWarningText');
+      const exContainer = document.getElementById('exerciseStepsContainer');
+
+      ['overweight', 'underweight', 'mild'].forEach(s => {
+        const btn = document.getElementById('btn-filter-' + s);
+        if (btn) {
+          if (s === status) {
+            btn.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-800 text-white shadow-sm transition";
+          } else {
+            btn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition";
+          }
+        }
+      });
+
+      if (status === 'overweight') {
+        regTitle.innerText = "Phác đồ rèn luyện cho học sinh THỪA CÂN / BÉO PHÌ";
+        coreWarning.innerHTML = `<strong class="uppercase text-rose-700 font-bold">Lưu ý cốt lõi cho giáo viên:</strong> TUYỆT ĐỐI KHÔNG ÉP HỌC SINH nhảy cao tiếp đất gối thẳng liên tục hoặc chạy cự ly rút đích quá dài gây sốc tim và thoái hóa sụn khớp gối sớm trên nền sân bê tông trường học[cite: 6].`;
+        exContainer.innerHTML = `
+          <div class="p-3 rounded-lg border border-slate-200 bg-slate-50/50">
+            <div class="font-bold text-emerald-800">1. Khởi động thích ứng & Căng cơ tĩnh (6 - 8 phút)</div>
+            <p class="text-slate-600 mt-1">Căng cơ đùi sau, cơ bắp chuối; xoay gối có đỡ trọng tải bằng hai tay chống gối.</p>
+          </div>
+          <div class="p-3 rounded-lg border border-slate-200 bg-slate-50/50">
+            <div class="font-bold text-emerald-800">2. Bài tập kỹ thuật giảm chấn (Bóng chuyền / Bóng rổ)</div>
+            <p class="text-slate-600 mt-1">Chuyền bóng cao tay tại chỗ, mô phỏng tay chạm bóng không bật nhảy; di chuyển bước trượt ngang cự ly 3m.</p>
+          </div>
+          <div class="p-3 rounded-lg border border-slate-200 bg-slate-50/50">
+            <div class="font-bold text-emerald-800">3. Ứng dụng AI ghi nhận & Tự hồi tĩnh</div>
+            <p class="text-slate-600 mt-1">Sử dụng vòng đeo tay thông minh / camera AI đo nhịp tim hồi phục sau bài tập.</p>
+          </div>
+        `;
+      } else if (status === 'underweight') {
+        regTitle.innerText = "Phác đồ rèn luyện cho học sinh THIẾU CÂN / THỂ LỰC YẾU";
+        coreWarning.innerHTML = `<strong class="uppercase text-amber-700 font-bold">Lưu ý cốt lõi cho giáo viên:</strong> Không áp dụng khối lượng vận động quá dày; chia nhỏ các đợt tập, cho học sinh nghỉ giữa quãng và bổ sung nước đều đặn để tránh hạ đường huyết.`;
+        exContainer.innerHTML = `
+          <div class="p-3 rounded-lg border border-slate-200 bg-slate-50/50">
+            <div class="font-bold text-emerald-800">1. Bài tập tăng cường sức mạnh cổ tay & Thăng bằng</div>
+            <p class="text-slate-600 mt-1">Tập nảy bóng vào tường, tập gập cổ tay với bóng nhẹ để nâng cao trương lực cơ.</p>
+          </div>
+          <div class="p-3 rounded-lg border border-slate-200 bg-slate-50/50">
+            <div class="font-bold text-emerald-800">2. Luyện tập chiến thuật & Nhãn quan thi đấu</div>
+            <p class="text-slate-600 mt-1">Phát huy độ khéo léo, kỹ thuật bỏ nhỏ, chuyền bóng đổi hướng thay vì đối đầu va chạm thể lực trực diện.</p>
+          </div>
+        `;
+      } else if (status === 'mild') {
+        regTitle.innerText = "Phác đồ lưu ý cho học sinh CÓ BỆNH NỀN NHẸ (Hen suyễn, tim mạch nhẹ)";
+        coreWarning.innerHTML = `<strong class="uppercase text-rose-700 font-bold">CẢNH BÁO Y TẾ HỌC ĐƯỜNG:</strong> Học sinh luôn phải mang theo thuốc xịt cắt cơn cá nhân bên người; giáo viên quan sát sắc diện môi, nhịp thở; cho phép học sinh chủ động dừng tập ngay khi có triệu chứng khó thở.`;
+        exContainer.innerHTML = `
+          <div class="p-3 rounded-lg border border-slate-200 bg-slate-50/50">
+            <div class="font-bold text-emerald-800">1. Vận động mức độ nhẹ - trung bình có kiểm soát</div>
+            <p class="text-slate-600 mt-1">Tập tư thế chuẩn bị, động tác tay không bóng, hỗ trợ bấm giờ và làm thư ký/trọng tài trận đấu.</p>
+          </div>
+          <div class="p-3 rounded-lg border border-slate-200 bg-slate-50/50">
+            <div class="font-bold text-emerald-800">2. Tập thở sâu & Thư giãn tinh thần</div>
+            <p class="text-slate-600 mt-1">Hướng dẫn kỹ thuật thở 4 thì để tăng dung tích sống của phổi.</p>
+          </div>
+        `;
+      } else {
+        regTitle.innerText = "Phác đồ rèn luyện cho học sinh THỂ LỰC ĐẠT CHUẨN";
+        coreWarning.innerHTML = `<strong class="uppercase text-emerald-700 font-bold">Lưu ý giáo viên:</strong> Duy trì cường độ tập luyện chuẩn theo khung phân phối chương trình, rèn luyện kỹ thuật nâng cao và tinh thần thi đấu đồng đội.`;
+      }
+    }
+
+    function calculateBMI() {
+      const h = parseFloat(document.getElementById('bmiHeight').value) / 100;
+      const w = parseFloat(document.getElementById('bmiWeight').value);
+      const resBox = document.getElementById('bmiResultBox');
+      
+      if (!h || !w || h <= 0 || w <= 0) {
+        alert("Vui lòng nhập chiều cao và cân nặng hợp lệ!");
+        return;
+      }
+
+      const bmi = (w / (h * h)).toFixed(1);
+      const cat = getBMICategory(bmi);
+
+      resBox.classList.remove('hidden');
+      resBox.innerHTML = `
+        <div class="flex items-center justify-between border-b pb-2">
+          <span>Chỉ số BMI của em: <strong class="text-base">${bmi}</strong></span>
+          <span class="${cat.badge} px-2 py-0.5 rounded font-bold">${cat.text}</span>
+        </div>
+        <p class="text-slate-600 mt-2"><strong>Khuyến nghị sư phạm & Dinh dưỡng:</strong> Duy trì rèn luyện, ăn uống lành mạnh và kiểm soát cường độ vận động an toàn.</p>
+      `;
+    }
+
+    function saveSession() {
+      saveStudentsToStorage();
+      alert("Đã sao lưu thành công danh sách học sinh, kế hoạch bài dạy và toàn bộ dữ liệu vào bộ nhớ trình duyệt!");
+    }
+
+    // Khởi tạo
+    window.addEventListener('DOMContentLoaded', () => {
+      syncAllStudentViews();
+      populateLessonSelect('bong-chuyen');
+      renderSpecificLessonPlan();
+    });
+  </script>
+</body>
+</html>
